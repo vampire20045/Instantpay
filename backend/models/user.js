@@ -1,4 +1,4 @@
-import mongoose  from "mongoose";
+import mongoose, { Mongoose }  from "mongoose";
 const UserSchema=new mongoose.Schema({
     First_name:{type:String,required:true},
     Last_name:{type:String,required:true},
@@ -6,5 +6,10 @@ const UserSchema=new mongoose.Schema({
     Username:{type:String,required:true}
 
 });
+const AccountSchema=new mongoose.Schema({
+    userId:{type:Mongoose.Schema.Types.ObjectId,ref:"User",required:true},
+    Balance:{type:Number,required:true}
+})
 const User=mongoose.model("User",UserSchema);
-export default User;
+const Account=mongoose.model("Account",AccountSchema);
+export {User,Account};

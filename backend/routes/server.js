@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import User from "../models/user.js";
+import {User,Account} from "../models/user.js";
 import { auth, Sec } from "../middleware/auth.js";
 import { z } from "zod";
 
@@ -12,7 +12,7 @@ const UserSc = z.object({
   First_name: z.string().min(4),
   Last_name: z.string().min(3),
   password: z.string().min(8).max(20),
-  Username: z.string().email(), // Email validation is enough
+  Username: z.string().email(), 
 });
 
 router.post("/signUp", async (req, res) => {
@@ -34,6 +34,9 @@ router.post("/signUp", async (req, res) => {
     body.password = hashedPassword;
 
     const dbUser = await User.create(body);
+    const userid=dbUser.id;
+    await Account.create({userId:userid,Balance:0});// create new account for user 
+
 
     const token = jwt.sign({ id: dbUser._id }, Sec, { expiresIn: "1h" });
 
