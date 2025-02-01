@@ -6,8 +6,8 @@ import {User,Account} from "../models/user.js";
 import { auth, Sec } from "../middleware/auth.js";
 import { z } from "zod";
 
-const router = express.Router();
-router.get("/balance",async(req,res)=>{
+const routers = express.Router();
+routers.get("/balance",async(req,res)=>{
     const account=await Account.findOne({userId:req.user});
     if(account){
         res.json({balance:account.Balance});
@@ -16,7 +16,7 @@ router.get("/balance",async(req,res)=>{
         res.json({message:"Account not found"});
     }
 });
-router.post("/deposit",async(req,res)=>{
+routers.post("/deposit",async(req,res)=>{
     const account=await Account.findOne({userId:req.user});
     if(account){
         account.Balance+=req.body.amount;
@@ -59,4 +59,4 @@ async function transfer(req) {
     await session.commitTransaction();
     console.log("done")
 }
-export {router};
+export {routers};

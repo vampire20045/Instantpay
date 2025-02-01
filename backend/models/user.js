@@ -7,7 +7,7 @@ const UserSchema=new mongoose.Schema({
 
 });
 const AccountSchema=new mongoose.Schema({
-    userId:{type:Mongoose.Schema.Types.ObjectId,ref:"User",required:true},
+    userId:{type:mongoose.Schema.Types.ObjectId,ref:"User"},
     Balance:{type:Number,required:true}
 })
 const User=mongoose.model("User",UserSchema);
