@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken"; // Correct import
+import jwt from "jsonwebtoken"; 
 
-const Sec = "Aryan"; // Secret Key
+const Sec = "Aryan";
 
 const auth = (req, res, next) => {
     const token = req.headers.authorization; // Get token from headers
