@@ -1,8 +1,7 @@
+import Balance from "../components/Balance";
 function Send(){
 <div>
-    <h1>
-        Send Money
-    </h1>
+    <Balance/>
 </div>
 }
 export default Send;
